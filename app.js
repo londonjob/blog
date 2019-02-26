@@ -3,6 +3,19 @@ const koaRouter = require("koa-router");
 const path = require("path");
 const render = require("koa-ejs");
 const bodyParser = require("koa-bodyparser");
+const mongoose = require("mongoose");
+
+mongoose.connect("mongodb://test:test123@ds063178.mlab.com:63178/londonjob", {
+  useNewUrlParser: true
+});
+
+var blogSchema = mongoose.Schema({
+  title: String,
+  post: String,
+  author: String
+});
+
+var Blog = mongoose.model("Blog", blogSchema);
 
 const app = new koa();
 const router = new koaRouter();
@@ -24,6 +37,14 @@ render(app, {
 router.get("/", index);
 router.get("/add", showAddPost);
 router.post("/add", addPost);
+router.get("/edit/:id", editPost);
+router.get("/delete/:id", deletePost);
+
+async function editPost(ctx) {}
+
+async function deletePost(ctx) {
+  const post = ctx.request.body;
+}
 
 async function index(ctx) {
   await ctx.render("index", {
@@ -37,8 +58,10 @@ async function showAddPost(ctx) {
 }
 
 async function addPost(ctx) {
-  const body = ctx.request.body;
-  things.push(body.thing);
+  const myPost = new Blog(ctx.request.body);
+  myPost.save();
+  //ctx.body = myPost;
+
   ctx.redirect("/");
 }
 

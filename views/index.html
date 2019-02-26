@@ -1,16 +1,21 @@
 <h1><%- title %></h1>
 
-<ul class="list-group">
+<ul class="list-group" id="things">
   <% things.forEach( thing => { %>
   <li class="list-group-item">
     <%= thing %>
     <a
-      href="/"
+      href="/delete/{{ thing.id }}"
       class="btn btn-danger btn-xs"
       style="float: right; margin-left: 10px"
+      >Delete</a
+    >
+    <a
+      href="/edit/{{ thing.id }}"
+      class="btn btn-danger btn-xs"
+      style="float: right;"
       >Edit</a
     >
-    <a href="/" class="btn btn-danger btn-xs" style="float: right;">Delete</a>
   </li>
   <% });%>
 </ul>
