@@ -4,6 +4,13 @@
   <% things.forEach( thing => { %>
   <li class="list-group-item">
     <%= thing %>
+    <a
+      href="/"
+      class="btn btn-danger btn-xs"
+      style="float: right; margin-left: 10px"
+      >Edit</a
+    >
+    <a href="/" class="btn btn-danger btn-xs" style="float: right;">Delete</a>
   </li>
   <% });%>
 </ul>
